@@ -4,6 +4,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-07-14
+
+### Added
+- **Automatic updates** for self-distributed installs. The manifest now
+  declares `browser_specific_settings.gecko.update_url` pointing at
+  `updates.json` in this repository, so Thunderbird checks for and installs new
+  versions on its own (Thunderbird does not require add-on signing, so no
+  signing step is involved). A GitHub Actions workflow regenerates
+  `updates.json` on every published release.
+
+> Upgrade note: this is the first version carrying the auto-update mechanism.
+> Install 0.1.3 manually once; from here on, updates are automatic.
+
 ## [0.1.2] - 2026-07-14
 
 ### Fixed
