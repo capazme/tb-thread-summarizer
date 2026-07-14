@@ -1,0 +1,14 @@
+{
+  "name": "tb-thread-summarizer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "package": "bash scripts/package.sh"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.0"
+  }
+}
