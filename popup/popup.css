@@ -1,1 +1,33 @@
-/* Implemented in Task 9. */
+:root {
+  color-scheme: light dark;
+  --fg: #1f2328;
+  --muted: #656d76;
+  --accent: #1d4ed8;
+  --bg-soft: #f6f8fa;
+  --border: #d0d7de;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --fg: #e6edf3; --muted: #9ea7b3; --accent: #6ea8fe; --bg-soft: #21262d; --border: #30363d; }
+}
+body {
+  width: 440px; max-height: 540px; margin: 0; display: flex; flex-direction: column;
+  font: 13px/1.45 -apple-system, "Segoe UI", sans-serif; color: var(--fg);
+}
+header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+header h1 { font-size: 14px; margin: 0; }
+#btn-options { background: none; border: none; font-size: 15px; cursor: pointer; color: var(--muted); }
+main { padding: 10px 14px; overflow-y: auto; flex: 1; }
+main h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); margin: 12px 0 4px; }
+main ul { margin: 4px 0; padding-left: 18px; }
+main p { margin: 4px 0; }
+footer { display: flex; gap: 8px; justify-content: flex-end; padding: 8px 12px; border-top: 1px solid var(--border); }
+footer button, .action { padding: 4px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-soft); color: var(--fg); cursor: pointer; }
+footer button:hover, .action:hover { border-color: var(--accent); }
+.phase { display: flex; gap: 10px; align-items: center; color: var(--muted); padding: 18px 4px; }
+.spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.error { color: #b42318; padding: 12px 4px; }
+.error .detail { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.meta { color: var(--muted); font-size: 11px; margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 6px; }
+pre.cmd { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 8px; overflow-x: auto; user-select: all; }
+.note { color: var(--muted); font-style: italic; }
