@@ -42,7 +42,7 @@ function onEvent(event) {
   switch (event.type) {
     case 'phase':
       if (event.phase === 'building') renderPhase('Ricostruzione del thread…');
-      else renderPhase(`Generazione… (${event.messageCount} messaggi)`);
+      else renderPhase(`Generazione… (${messageCountLabel(event.messageCount)})`);
       setButtons({ cancel: event.phase === 'generating', copy: false, regen: false });
       break;
     case 'chunk':
@@ -73,7 +73,7 @@ function onEvent(event) {
 }
 
 function metaBar(meta) {
-  const parts = [`${meta.usedCount} messaggi`, `modello ${meta.model}`];
+  const parts = [messageCountLabel(meta.usedCount), `modello ${meta.model}`];
   if (meta.truncatedCount > 0) parts.push(`thread troncato (esclusi ${meta.truncatedCount} più vecchi)`);
   if (meta.usedCount < meta.totalFound) parts.push(`trovati ${meta.totalFound} in totale`);
   if (meta.cached) parts.push('dalla cache');
@@ -150,4 +150,8 @@ function setButtons({ cancel, copy, regen }) {
   btnCancel.hidden = !cancel;
   btnCopy.hidden = !copy;
   btnRegen.hidden = !regen;
+}
+
+function messageCountLabel(n) {
+  return `${n} ${n === 1 ? 'messaggio' : 'messaggi'}`;
 }
