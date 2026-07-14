@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <html lang="it">
-<head><meta charset="utf-8"></head>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font: 13px/1.5 -apple-system, "Segoe UI", sans-serif; margin: 16px; max-width: 560px; }
+    label { display: block; font-weight: 600; margin: 14px 0 4px; }
+    input, select { width: 100%; box-sizing: border-box; padding: 5px 8px; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .row > * { flex: 1; }
+    .row button { flex: 0 0 auto; }
+    button { padding: 5px 14px; cursor: pointer; }
+    #status, #save-status { font-size: 12px; margin-left: 8px; }
+    .ok { color: #067647; } .err { color: #b42318; }
+    pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 8px; user-select: all; overflow-x: auto; }
+    .hint { color: #656d76; font-size: 12px; margin-top: 2px; }
+    hr { margin: 20px 0; border: none; border-top: 1px solid #d0d7de; }
+  </style>
+</head>
 <body>
-  <div id="root">Opzioni — implementate nel Task 10.</div>
+  <h2>Riassumi Thread — Opzioni</h2>
+
+  <label for="endpoint">Endpoint Ollama</label>
+  <div class="row">
+    <input id="endpoint" type="url" placeholder="http://localhost:11434">
+    <button id="btn-test">Testa connessione</button><span id="status"></span>
+  </div>
+
+  <label for="model">Modello</label>
+  <div class="row">
+    <select id="model"><option value="">(automatico: primo gemma3, altrimenti il primo)</option></select>
+    <button id="btn-refresh">Aggiorna elenco</button>
+  </div>
+  <div class="hint">L'elenco viene letto dai modelli installati in Ollama.</div>
+
+  <label for="max-messages">Numero massimo di messaggi per thread</label>
+  <input id="max-messages" type="number" min="2" max="100" step="1">
+
+  <p><button id="btn-save">Salva</button><span id="save-status"></span></p>
+
+  <hr>
+  <h3>Setup Ollama (una tantum)</h3>
+  <p>Ollama per default rifiuta le richieste delle estensioni. Esegui nel Terminale e riavvia Ollama:</p>
+  <pre>launchctl setenv OLLAMA_ORIGINS "moz-extension://*"</pre>
+
   <script type="module" src="options.js"></script>
 </body>
 </html>
