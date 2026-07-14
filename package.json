@@ -1,8 +1,29 @@
 {
   "name": "tb-thread-summarizer",
   "version": "0.1.0",
-  "private": true,
+  "description": "Thunderbird MailExtension that summarizes email threads with a local Ollama model — privacy-first, no data leaves your machine.",
   "type": "module",
+  "private": true,
+  "license": "MPL-2.0",
+  "author": "capazme",
+  "homepage": "https://github.com/capazme/tb-thread-summarizer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capazme/tb-thread-summarizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/capazme/tb-thread-summarizer/issues"
+  },
+  "keywords": [
+    "thunderbird",
+    "mailextension",
+    "ollama",
+    "email",
+    "summarization",
+    "llm",
+    "local-ai",
+    "privacy"
+  ],
   "scripts": {
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",

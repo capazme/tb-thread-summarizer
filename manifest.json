@@ -3,6 +3,8 @@
   "name": "Thread Summarizer (Ollama)",
   "version": "0.1.0",
   "description": "Riassume il thread del messaggio visualizzato con un modello Ollama locale. Nessun dato lascia il tuo computer.",
+  "author": "capazme",
+  "homepage_url": "https://github.com/capazme/tb-thread-summarizer",
   "browser_specific_settings": {
     "gecko": {
       "id": "tb-thread-summarizer@puzio.dev",
