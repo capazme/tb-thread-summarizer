@@ -1,6 +1,6 @@
 {
   "name": "tb-thread-summarizer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Thunderbird MailExtension that summarizes email threads with a local Ollama model — privacy-first, no data leaves your machine.",
   "type": "module",
   "private": true,
