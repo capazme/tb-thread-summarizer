@@ -87,8 +87,15 @@ function renderPhase(text) {
 function renderError({ code, detail }) {
   const views = {
     unreachable: {
-      title: 'Ollama non è in esecuzione',
-      body: '<p>Avvia Ollama e riprova.</p>',
+      title: 'Ollama non risponde',
+      body:
+        '<p>Due possibili cause:</p>' +
+        '<ul>' +
+        '<li><strong>Ollama non è avviato</strong>: aprilo e riprova.</li>' +
+        '<li><strong>È avviato ma non ha ancora il permesso per le estensioni</strong>: ' +
+        'esegui una volta nel Terminale, poi <strong>riavvia Ollama</strong>.</li>' +
+        '</ul>' +
+        `<pre class="cmd">${escapeHtml(OLLAMA_ORIGINS_CMD)}</pre>`,
       action: { label: 'Riprova', run: () => summarize(false) },
     },
     cors: {
