@@ -37,6 +37,14 @@ launchctl setenv OLLAMA_ORIGINS "moz-extension://*"
 
 Then quit Ollama from the menu-bar icon and reopen it.
 
+> **Make it survive reboots.** `launchctl setenv` is reset every time you
+> restart your Mac. To set it permanently, run once (installs a per-user
+> LaunchAgent; the script prints how to undo it):
+>
+> ```bash
+> bash scripts/persist-ollama-origins-macos.sh
+> ```
+
 **Linux** (systemd): add to the service via `systemctl edit ollama.service`
 
 ```ini

@@ -42,6 +42,7 @@
   <h3>Setup Ollama (una tantum)</h3>
   <p>Ollama per default rifiuta le richieste delle estensioni. Esegui nel Terminale e riavvia Ollama:</p>
   <pre>launchctl setenv OLLAMA_ORIGINS "moz-extension://*"</pre>
+  <p class="hint">Questo comando si azzera al riavvio del Mac. Per renderlo permanente, esegui una volta lo script <code>scripts/persist-ollama-origins-macos.sh</code> incluso nel progetto (vedi README).</p>
 
   <script type="module" src="options.js"></script>
 </body>
