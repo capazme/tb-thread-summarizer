@@ -21,7 +21,13 @@ async function refreshModels(selected) {
   } catch {
     // endpoint down: keep the automatic option only
   }
-  select.value = [...select.options].some((o) => o.value === selected) ? selected : '';
+  if (selected && ![...select.options].some((o) => o.value === selected)) {
+    const opt = document.createElement('option');
+    opt.value = selected;
+    opt.textContent = `${selected} (non verificato)`;
+    select.appendChild(opt);
+  }
+  select.value = selected;
 }
 
 async function load() {

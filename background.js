@@ -79,6 +79,12 @@ async function handleSummarize({ tabId, force }, listener, previousJob) {
     }
   }
 
+  const raced = manager.getJob(key);
+  if (raced) {
+    manager.attach(raced, listener);
+    return raced;
+  }
+
   const job = manager.createJob(key);
   manager.attach(job, listener);
   runGeneration(job, thread, totalFound, settings); // errors handled inside
