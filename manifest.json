@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Thread Summarizer (Ollama)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Riassume il thread del messaggio visualizzato con un modello Ollama locale. Nessun dato lascia il tuo computer.",
   "author": "capazme",
   "homepage_url": "https://github.com/capazme/tb-thread-summarizer",

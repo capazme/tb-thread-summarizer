@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-07-14
+
+### Fixed
+- Italian singular/plural for the message count in the panel: it now shows
+  "1 messaggio" instead of "1 messaggi" (and "N messaggi" for N > 1), in both
+  the generation phase line and the summary meta line.
+
+[0.1.2]: https://github.com/capazme/tb-thread-summarizer/releases/tag/v0.1.2
+
 ## [0.1.1] - 2026-07-14
 
 ### Changed
