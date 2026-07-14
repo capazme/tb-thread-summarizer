@@ -29,12 +29,15 @@ function makeHeader(id, headerMessageId, subject, dateIso, accountId = 'acc1') {
 }
 
 function makeFakeMessenger({ store, fullHeadersById }) {
+  const queries = [];
   return {
+    queries,
     messages: {
       async getFull(id) {
         return { headers: fullHeadersById[id] ?? {} };
       },
       async query(queryInfo) {
+        queries.push(queryInfo);
         let out = store;
         if (queryInfo.headerMessageId) {
           out = out.filter((h) => h.headerMessageId === queryInfo.headerMessageId);
@@ -97,5 +100,30 @@ describe('buildThread', () => {
     const { messages, totalFound } = await buildThread(messenger, lone, {});
     expect(messages).toHaveLength(1);
     expect(totalFound).toBe(1);
+  });
+
+  it('always includes currentHeader even when capping would drop it', async () => {
+    const messenger = makeFakeMessenger({ store, fullHeadersById });
+    const { messages, totalFound } = await buildThread(messenger, m1, { maxMessages: 2 });
+    expect(messages.map((h) => h.headerMessageId)).toEqual(['root@x.it', 'leaf@x.it']);
+    expect(totalFound).toBe(3);
+  });
+
+  it('omits the accountId key entirely when currentHeader has no folder', async () => {
+    const lone = {
+      id: 8,
+      headerMessageId: 'lone2@x.it',
+      subject: 'Nota spese',
+      date: '2026-07-05T10:00:00Z',
+      author: 'a8@x.it',
+    };
+    const messenger = makeFakeMessenger({ store: [lone], fullHeadersById: { 8: {} } });
+    const { messages } = await buildThread(messenger, lone, {});
+    expect(messages).toHaveLength(1);
+    const subjectQueries = messenger.queries.filter((q) => 'subject' in q);
+    expect(subjectQueries.length).toBeGreaterThan(0);
+    for (const q of subjectQueries) {
+      expect(Object.hasOwn(q, 'accountId')).toBe(false);
+    }
   });
 });
