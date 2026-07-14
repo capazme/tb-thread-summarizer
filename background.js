@@ -28,6 +28,7 @@ messenger.runtime.onConnect.addListener((port) => {
       }
     } catch (err) {
       listener(toErrorEvent(err));
+      attachedJob = null;
     }
   });
 
@@ -85,6 +86,7 @@ async function handleSummarize({ tabId, force }, listener, previousJob) {
 }
 
 async function runGeneration(job, thread, totalFound, settings) {
+  let pendingSave = Promise.resolve();
   try {
     const client = createOllamaClient({ endpoint: settings.endpointUrl });
     let model = settings.model;
@@ -112,7 +114,7 @@ async function runGeneration(job, thread, totalFound, settings) {
         const now = Date.now();
         if (now - lastSave > 2000) {
           lastSave = now;
-          manager
+          pendingSave = manager
             .setCached(job.key, { status: 'interrupted', partial: job.partial, savedAt: new Date().toISOString() })
             .catch(() => {});
         }
@@ -127,13 +129,16 @@ async function runGeneration(job, thread, totalFound, settings) {
       cached: false,
       generatedAt: new Date().toISOString(),
     };
+    await pendingSave;
     await manager.setCached(job.key, { summary, meta, savedAt: meta.generatedAt });
     manager.emit(job, { type: 'done', summary, meta });
   } catch (err) {
     if (err instanceof OllamaError && err.code === 'cancelled') {
+      await pendingSave;
       manager.clearCached(job.key).catch(() => {});
       manager.emit(job, { type: 'cancelled' });
     } else {
+      await pendingSave;
       manager.clearCached(job.key).catch(() => {});
       manager.emit(job, toErrorEvent(err));
     }
